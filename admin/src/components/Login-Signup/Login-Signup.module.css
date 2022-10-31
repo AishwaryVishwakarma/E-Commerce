@@ -1,0 +1,128 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  padding: 3rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  animation: slide-from-top 0.8s ease-in-out;
+}
+
+@keyframes slide-from-top {
+  0% {
+    transform: translate(-50%, -50%) translateY(-300px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+.login__form,
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1,
+h2 {
+  color: var(--primary-light);
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.login__form > form,
+.signup__form > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.1rem;
+  color: rgb(97, 97, 97);
+  font-weight: 500;
+}
+
+.signup__form > form{
+  font-size: 1rem;
+}
+
+.login__form > form > label {
+  margin-bottom: 0.3rem;
+  margin-top: 1.4rem;
+}
+
+.signup__form > form > label{
+  margin-bottom: 0.2rem;
+  margin-top: 1rem;
+}
+
+.input__field {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.input__field > input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.buttons > button {
+  padding: 0.5rem 1rem;
+  width: 8rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  background: var(--primary-light);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttons > button:hover {
+  background: var(--primary-dark);
+}
+
+.buttons > button:disabled {
+  background: #ccc;
+}
+
+.error__message{
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.success__message{
+  color: green;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
