@@ -5,6 +5,8 @@ import { BiUser } from "react-icons/bi";
 import useLoginInput from "../hooks/useLoginInput";
 import useSignupInput from "../hooks/useSignupInput";
 import classes from "./Login-Signup.module.css";
+import { useNavigate } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
 
 export const loginActions = {
   EMAIL: "EMAIL",
@@ -25,7 +27,12 @@ export const signupActions = {
 };
 
 const Login_Signup = () => {
+  // console.log("Login_Signup");
+
+  const navigate = useNavigate();
+
   const [onLoginPage, setOnLogin] = React.useState(true);
+  const [progress, setProgress] = React.useState(0);
 
   function togglePage() {
     setOnLogin((prev) => !prev);
@@ -33,7 +40,6 @@ const Login_Signup = () => {
       message: "",
       status: 0,
     });
-
     setLoginMessage({
       message: "",
       status: 0,
@@ -46,7 +52,7 @@ const Login_Signup = () => {
     loginHandler,
     loginMessage,
     setLoginMessage,
-  } = useLoginInput();
+  } = useLoginInput(setProgress);
 
   const {
     signupState,
@@ -57,7 +63,14 @@ const Login_Signup = () => {
     signupHandler,
     signupMessage,
     setSignupMessage,
-  } = useSignupInput(togglePage);
+  } = useSignupInput(togglePage, setProgress);
+
+  React.useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn === "true") {
+      navigate("/home");
+    }
+  }, []);
 
   const loginContent = (
     <section className={classes.login__form}>
@@ -315,9 +328,16 @@ const Login_Signup = () => {
   );
 
   return (
-    <main className={classes.container}>
-      {onLoginPage ? loginContent : signupContent}
-    </main>
+    <>
+      <LoadingBar
+        color="#1a55e3"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+      <main className={classes.container}>
+        {onLoginPage ? loginContent : signupContent}
+      </main>
+    </>
   );
 };
 

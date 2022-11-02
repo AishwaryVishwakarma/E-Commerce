@@ -1,5 +1,6 @@
 import React from "react";
 import { loginActions } from "../Login-Signup/Login-Signup";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const loginInitialState = {
@@ -32,7 +33,8 @@ const reducer = (state, action) => {
   }
 };
 
-export default function useLoginInput() {
+export default function useLoginInput(setProgress) {
+  const navigate = useNavigate();
   const [loginState, loginDispatch] = React.useReducer(
     reducer,
     loginInitialState
@@ -49,6 +51,7 @@ export default function useLoginInput() {
   function loginHandler(event) {
     event.preventDefault();
     if (isFormValid) {
+      setProgress(30);
       axios
         .get("http://localhost:8230/login", {
           params: {
@@ -57,6 +60,7 @@ export default function useLoginInput() {
           },
         })
         .then((response) => {
+          setProgress(60);
           if (response.status === 201) {
             setLoginMessage({
               message: response.data.message,
@@ -67,16 +71,21 @@ export default function useLoginInput() {
                 message: "",
                 status: 0,
               });
+              setProgress(100);
+              localStorage.setItem("isLoggedIn", true);
+              navigate("/home");
             }, 2000);
           }
         })
         .catch((error) => {
+          setProgress(100);
           setLoginMessage({
             message: error.response.data.error,
             status: error.response.status,
           });
         });
     } else {
+      setProgress(100);
       setLoginMessage({
         message: "Please fill all the fields",
         status: 422,
@@ -84,5 +93,11 @@ export default function useLoginInput() {
     }
   }
 
-  return { loginState, loginDispatch, loginHandler, loginMessage, setLoginMessage };
+  return {
+    loginState,
+    loginDispatch,
+    loginHandler,
+    loginMessage,
+    setLoginMessage,
+  };
 }

@@ -56,7 +56,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function (togglePage) {
+export default function (togglePage, setProgress) {
   const [signupState, signupDispatch] = React.useReducer(
     reducer,
     signupInitialState
@@ -76,22 +76,24 @@ export default function (togglePage) {
   const ispasswordValid =
     passwordMatch && signupState.password.trim().length >= 8;
 
-  const isFormValid = React.useMemo(() => {
+  const isFormValid = () => {
     return signupState.phone.trim().length === 10 && ispasswordValid;
-  }, [signupState]);
+  };
 
   const signupHandler = (event) => {
     event.preventDefault();
     if (isFormValid) {
+      setProgress(30);
       axios
         .post("http://localhost:8230/signup", {
           name: signupState.name.trim(),
-          email: signupState.email.trim(),
+          email: signupState.email.trim().toLowerCase(),
           phone: signupState.phone.trim(),
           password: signupState.password.trim(),
         })
         .then(
           (response) => {
+            setProgress(60);
             if (response.status === 201) {
               console.log(response.data.message);
               setSignupMessage({
@@ -105,10 +107,12 @@ export default function (togglePage) {
                 message: "",
                 status: 0,
               });
+              setProgress(100);
               togglePage();
             }, 2000);
           },
           (error) => {
+            setProgress(100);
             setSignupMessage({
               message: error.response.data.error,
               status: 422,
@@ -116,6 +120,7 @@ export default function (togglePage) {
           }
         );
     } else {
+      setProgress(100);
       setSignupMessage({
         message: "Please fill all the fields correctly",
         status: 422,
