@@ -9,7 +9,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login_Signup />} />
-      <Route path="/home" element={<Protected component={Home} />} />
+      <Route path="/home/*" element={<Protected component={Home} />} />
       <Route path="/*" element={<ErrorPage />} />
     </Routes>
   );

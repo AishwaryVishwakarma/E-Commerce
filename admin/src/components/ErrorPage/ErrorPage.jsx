@@ -17,7 +17,7 @@ const ErrorPage = () => {
         marginTop: "2rem",
       }}
     >
-      404 Not Found, Redirecting back to Login Page...
+      404 Not Found, Redirecting back...
     </div>
   );
 };
