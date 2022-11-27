@@ -29,6 +29,8 @@ export const signupActions = {
 const Login_Signup = () => {
   // console.log("Login_Signup");
 
+  const inputRef = React.useRef();
+
   const navigate = useNavigate();
 
   const [onLoginPage, setOnLogin] = React.useState(true);
@@ -70,6 +72,7 @@ const Login_Signup = () => {
     if (isLoggedIn === "true") {
       navigate("/home");
     }
+    inputRef.current.focus();
   }, []);
 
   const loginContent = (
@@ -91,6 +94,7 @@ const Login_Signup = () => {
               })
             }
             autoComplete="on"
+            ref = {inputRef}
           />
           <MdAlternateEmail />
         </div>
@@ -173,6 +177,7 @@ const Login_Signup = () => {
               });
             }}
             required
+            autoComplete="on"
           />
           <BiUser />
         </div>

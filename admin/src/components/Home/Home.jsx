@@ -1,22 +1,30 @@
 import React from "react";
 import classes from "./Home.module.css";
-import { useNavigate } from "react-router-dom";
-import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import { Routes, Route } from "react-router-dom";
-import ErrorPage from "../ErrorPage/ErrorPage";
-
+import Dashboard from "../Dashboard/Dashboard";
+import Products from "../Products/Products";
+import Orders from "../Orders/Orders";
+import Customers from "../Customers/Customers";
+import Reports from "../Reports/Reports";
+import Integrations from "../Integrations/Integrations";
 const Home = () => {
-  const navigate = useNavigate();
-
-  function logoutHandler() {
-    localStorage.removeItem("isLoggedIn");
-    navigate("/");
-  }
   return (
-    <Routes>
-      <Route path="/" element={<Sidebar />} />
-      <Route path="/*" element={<ErrorPage />} />
-    </Routes>
+    <>
+      <div className={classes.home}>
+        <Sidebar />
+        <div className={classes.content}>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/integrations" element={<Integrations />} />
+          </Routes>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -13,33 +13,66 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  console.log("Sidebar rendered");
   const navigate = useNavigate();
 
   const [sidebar, setSidebar] = React.useState(true);
   const [currentTab, setCurrentTab] = React.useState("home");
 
+  React.useEffect(() => {
+    const isSidebarOpen = localStorage.getItem("sidebar");
+    if(isSidebarOpen === null){
+      localStorage.setItem("sidebar", "true");
+      setSidebar(true);
+    } else {
+      setSidebar(isSidebarOpen === "true");
+    }
+  }, [])
+
   function toggleSidebar() {
-    setSidebar((prev) => !prev);
+    localStorage.setItem("sidebar", !sidebar);
+    setSidebar(sidebar => !sidebar);
   }
 
   function tabHandler(tab) {
     setCurrentTab(tab);
+    if (tab === "home") {
+      navigate(`/${tab}`);
+    } else {
+      navigate(`/home/${tab}`);
+    }
   }
 
   function getClassName(tab) {
+    const path = window.location.pathname.split("/")[2];
     if (sidebar) {
-      return currentTab === tab
-        ? `${classes.sidebar__items__open} ${classes.active}`
-        : classes.sidebar__items__open;
+      switch (path) {
+        case undefined:
+          return currentTab === tab
+            ? `${classes.sidebar__items__open} ${classes.active}`
+            : classes.sidebar__items__open;
+        default:
+          return path === tab
+            ? `${classes.sidebar__items__open} ${classes.active}`
+            : classes.sidebar__items__open;
+      }
     } else {
-      return currentTab === tab
-        ? `${classes.sidebar__items__close} ${classes.active}`
-        : classes.sidebar__items__close;
+      switch (path) {
+        case undefined:
+          return currentTab === tab
+            ? `${classes.sidebar__items__close} ${classes.active}`
+            : classes.sidebar__items__close;
+        default:
+          return path === tab
+            ? `${classes.sidebar__items__close} ${classes.active}`
+            : classes.sidebar__items__close;
+      }
     }
   }
 
   function logoutHandler() {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("sidebar");
     navigate("/");
   }
 
@@ -52,6 +85,7 @@ const Sidebar = () => {
         <li className={getClassName("home")} onClick={() => tabHandler("home")}>
           <RiDashboardFill />
           <span>Dashboard</span>
+          {!sidebar && <span className={classes.tooltiptext}>Dashboard</span>}
         </li>
         <li
           className={getClassName("products")}
@@ -59,6 +93,7 @@ const Sidebar = () => {
         >
           <MdProductionQuantityLimits />
           <span>Products</span>
+          {!sidebar && <span className={classes.tooltiptext}>Products</span>}
         </li>
         <li
           className={getClassName("orders")}
@@ -66,6 +101,7 @@ const Sidebar = () => {
         >
           <RiShoppingBasket2Fill />
           <span>Orders</span>
+          {!sidebar && <span className={classes.tooltiptext}>Orders</span>}
         </li>
         <li
           className={getClassName("customers")}
@@ -73,6 +109,7 @@ const Sidebar = () => {
         >
           <BsFillPeopleFill />
           <span>Customers</span>
+          {!sidebar && <span className={classes.tooltiptext}>Customers</span>}
         </li>
         <li
           className={getClassName("reports")}
@@ -80,6 +117,7 @@ const Sidebar = () => {
         >
           <HiDocumentReport />
           <span>Reports</span>
+          {!sidebar && <span className={classes.tooltiptext}>Reports</span>}
         </li>
         <li
           className={getClassName("integrations")}
@@ -87,6 +125,7 @@ const Sidebar = () => {
         >
           <AiOutlineSetting />
           <span>Integrations</span>
+          {!sidebar && <span className={classes.tooltiptext}>Integrations</span>}
         </li>
       </ul>
       {sidebar ? (
