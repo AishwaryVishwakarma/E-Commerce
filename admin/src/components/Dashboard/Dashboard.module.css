@@ -1,3 +1,20 @@
 .dashboard{
     height: 100%;
+    /* border: 1px solid red; */
+}
+
+.header{
+    height: 2.5rem;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    font-weight: 600;
+    color: #555;
+    font-size: 1.1rem; 
+    border-bottom: 1px solid rgb(227, 227, 227);
+}
+
+.content{
+    padding: 1rem 2rem;
 }

@@ -17,6 +17,18 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    category: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+    },
+    rating: {
+        type: Number,
+        required: true,
+    },
 });
 
 const Item = mongoose.model("Item", itemSchema);

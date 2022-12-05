@@ -1,23 +1,17 @@
 .sidebar__container{
     width: max-content;
     height: 100vh;
-    position: relative;
     border-right: 1px solid #e5e5e5;
     background-color: #fff;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    z-index: 1;
+    z-index: 1000;
     color: white;
     transition: all 0.3s ease-in-out;
+    position: sticky;
+    top: 0;
+    left: 0;    
 }
 
-.home__icon{
-    color: var(--primary-light);
-    font-size: 2rem;
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
 .sidebar__container > ul{
     padding-top: 5rem;

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Admin = require("../models/adminSchema");
+const Item = require("../models/itemSchema");
 
 router.post("/signup", async (req, res) => {
   const { name, email, phone, password } = req.body;
@@ -38,10 +39,14 @@ router.get("/login", async (req, res) => {
     const userLogin = await Admin.findOne({ email: email, password: password });
     console.log(userLogin);
     if (userLogin) {
-      res.status(201).json({ message: "User logged in successfully" });
+      res
+        .status(201)
+        .json({ message: "User logged in successfully", userInfo: userLogin });
       console.log(userLogin);
     } else {
-      return res.status(422).json({ error: "Invalid credentials, please try again" });
+      return res
+        .status(422)
+        .json({ error: "Invalid credentials, please try again" });
     }
   } catch (error) {
     res.status(422).json({ error: "Something went wrong" });

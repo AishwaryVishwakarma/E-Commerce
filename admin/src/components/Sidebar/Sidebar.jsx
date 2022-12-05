@@ -13,7 +13,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  console.log("Sidebar rendered");
+  // console.log("Sidebar rendered");
   const navigate = useNavigate();
 
   const [sidebar, setSidebar] = React.useState(true);
@@ -21,17 +21,17 @@ const Sidebar = () => {
 
   React.useEffect(() => {
     const isSidebarOpen = localStorage.getItem("sidebar");
-    if(isSidebarOpen === null){
+    if (isSidebarOpen === null) {
       localStorage.setItem("sidebar", "true");
       setSidebar(true);
     } else {
       setSidebar(isSidebarOpen === "true");
     }
-  }, [])
+  }, []);
 
   function toggleSidebar() {
     localStorage.setItem("sidebar", !sidebar);
-    setSidebar(sidebar => !sidebar);
+    setSidebar((sidebar) => !sidebar);
   }
 
   function tabHandler(tab) {
@@ -73,6 +73,7 @@ const Sidebar = () => {
   function logoutHandler() {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("sidebar");
+    localStorage.removeItem("userInfo");
     navigate("/");
   }
 
@@ -125,7 +126,9 @@ const Sidebar = () => {
         >
           <AiOutlineSetting />
           <span>Integrations</span>
-          {!sidebar && <span className={classes.tooltiptext}>Integrations</span>}
+          {!sidebar && (
+            <span className={classes.tooltiptext}>Integrations</span>
+          )}
         </li>
       </ul>
       {sidebar ? (

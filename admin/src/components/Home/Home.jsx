@@ -8,9 +8,18 @@ import Orders from "../Orders/Orders";
 import Customers from "../Customers/Customers";
 import Reports from "../Reports/Reports";
 import Integrations from "../Integrations/Integrations";
+
+export const userContext = React.createContext();
+
 const Home = () => {
+  const [userInfo, setUserInfo] = React.useState({});
+
+  React.useEffect(() => {
+    setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
+  }, []);
+
   return (
-    <>
+    <userContext.Provider value={userInfo}>
       <div className={classes.home}>
         <Sidebar />
         <div className={classes.content}>
@@ -24,7 +33,7 @@ const Home = () => {
           </Routes>
         </div>
       </div>
-    </>
+    </userContext.Provider>
   );
 };
 

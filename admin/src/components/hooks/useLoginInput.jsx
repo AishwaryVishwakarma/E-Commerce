@@ -73,6 +73,7 @@ export default function useLoginInput(setProgress) {
               });
               setProgress(100);
               localStorage.setItem("isLoggedIn", true);
+              localStorage.setItem("userInfo", JSON.stringify(response.data.userInfo));
               navigate("/home");
             }, 2000);
           }
