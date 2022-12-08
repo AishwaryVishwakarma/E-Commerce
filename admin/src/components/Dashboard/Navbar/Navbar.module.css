@@ -29,22 +29,42 @@
 
 .icons{
     margin-left: auto;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     color: #555;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
+}
+
+.icons *{
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+}
+
+.icons *:hover{
+    color: #fff;
+    cursor: pointer;
+    background-color: var(--primary-light);
 }
 
 .profile{
     height: 100%;
-    width: 8rem;
-    text-align: center;
-    font-size: 0.9rem;
+    padding: 0 1rem;
+   font-size: 0.9rem;
     background-color:  #f3f3f9;
     margin-left: 1.5rem;
     color: #555;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-weight: 500;
+}
+
+.profile > .profile__icon{
+    font-size: 1.2rem;
+}
+
+.profile > p{
+    margin: 0 auto;
 }

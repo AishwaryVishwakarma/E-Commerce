@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { BsMoon } from "react-icons/bs";
 import { MdOutlineWidgets } from "react-icons/md";
+import {BiUserCircle} from "react-icons/bi"
 import { userContext } from "../../Home/Home";
 
 const Navbar = () => {
@@ -30,13 +31,11 @@ const Navbar = () => {
         <AiOutlineShopping />
         <AiOutlineFullscreen />
         <BsMoon
-          style={{
-            fontSize: "1.3rem",
-          }}
         />
         <AiOutlineBell />
       </div>
       <div className={classes.profile}>
+        <BiUserCircle className={classes.profile__icon}/>
         <p>{ctx.name}</p>
       </div>
     </div>

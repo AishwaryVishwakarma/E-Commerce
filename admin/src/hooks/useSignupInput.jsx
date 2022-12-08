@@ -1,5 +1,5 @@
 import React from "react";
-import { signupActions } from "../Login-Signup/Login-Signup";
+import { signupActions } from "../components/Login-Signup/Login-Signup";
 import axios from "axios";
 
 const signupInitialState = {

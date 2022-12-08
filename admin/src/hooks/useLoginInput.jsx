@@ -1,5 +1,5 @@
 import React from "react";
-import { loginActions } from "../Login-Signup/Login-Signup";
+import { loginActions } from "../components/Login-Signup/Login-Signup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
