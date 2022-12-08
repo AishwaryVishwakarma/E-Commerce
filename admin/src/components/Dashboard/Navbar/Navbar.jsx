@@ -13,6 +13,7 @@ import { userContext } from "../../Home/Home";
 const Navbar = () => {
   const ctx = React.useContext(userContext);
 
+
   return (
     <div className={classes.navbar}>
       <div className={classes.search_field}>

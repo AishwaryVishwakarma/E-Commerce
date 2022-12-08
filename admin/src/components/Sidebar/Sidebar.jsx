@@ -10,14 +10,13 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { HiDocumentReport } from "react-icons/hi";
 import { BiLogOutCircle } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   // console.log("Sidebar rendered");
   const navigate = useNavigate();
 
   const [sidebar, setSidebar] = React.useState(true);
-  const [currentTab, setCurrentTab] = React.useState("home");
 
   React.useEffect(() => {
     const isSidebarOpen = localStorage.getItem("sidebar");
@@ -34,21 +33,14 @@ const Sidebar = () => {
     setSidebar((sidebar) => !sidebar);
   }
 
-  function tabHandler(tab) {
-    setCurrentTab(tab);
-    if (tab === "home") {
-      navigate(`/${tab}`);
-    } else {
-      navigate(`/home/${tab}`);
-    }
-  }
-
   function getClassName(tab) {
-    const path = window.location.pathname.split("/")[2];
+    let path = window.location.pathname.split("/");
+    path = path[2];
+    console.log(path);
     if (sidebar) {
       switch (path) {
         case undefined:
-          return currentTab === tab
+          return tab === "home"
             ? `${classes.sidebar__items__open} ${classes.active}`
             : classes.sidebar__items__open;
         default:
@@ -59,7 +51,7 @@ const Sidebar = () => {
     } else {
       switch (path) {
         case undefined:
-          return currentTab === tab
+          return tab === "home"
             ? `${classes.sidebar__items__close} ${classes.active}`
             : classes.sidebar__items__close;
         default:
@@ -83,53 +75,41 @@ const Sidebar = () => {
         {sidebar ? <AiOutlineArrowLeft /> : <AiOutlineArrowRight />}
       </div>
       <ul>
-        <li className={getClassName("home")} onClick={() => tabHandler("home")}>
+        <NavLink className={getClassName("home")} to="/home">
           <RiDashboardFill />
           <span>Dashboard</span>
           {!sidebar && <span className={classes.tooltiptext}>Dashboard</span>}
-        </li>
-        <li
-          className={getClassName("products")}
-          onClick={() => tabHandler("products")}
-        >
+        </NavLink>
+        <NavLink className={getClassName("products")} to="/home/products">
           <MdProductionQuantityLimits />
           <span>Products</span>
           {!sidebar && <span className={classes.tooltiptext}>Products</span>}
-        </li>
-        <li
-          className={getClassName("orders")}
-          onClick={() => tabHandler("orders")}
-        >
+        </NavLink>
+        <NavLink className={getClassName("orders")} to="/home/orders">
           <RiShoppingBasket2Fill />
           <span>Orders</span>
           {!sidebar && <span className={classes.tooltiptext}>Orders</span>}
-        </li>
-        <li
-          className={getClassName("customers")}
-          onClick={() => tabHandler("customers")}
-        >
+        </NavLink>
+        <NavLink className={getClassName("customers")} to="/home/customers">
           <BsFillPeopleFill />
           <span>Customers</span>
           {!sidebar && <span className={classes.tooltiptext}>Customers</span>}
-        </li>
-        <li
-          className={getClassName("reports")}
-          onClick={() => tabHandler("reports")}
-        >
+        </NavLink>
+        <NavLink className={getClassName("reports")} to="/home/reports">
           <HiDocumentReport />
           <span>Reports</span>
           {!sidebar && <span className={classes.tooltiptext}>Reports</span>}
-        </li>
-        <li
+        </NavLink>
+        <NavLink
           className={getClassName("integrations")}
-          onClick={() => tabHandler("integrations")}
+          to="/home/integrations"
         >
           <AiOutlineSetting />
           <span>Integrations</span>
           {!sidebar && (
             <span className={classes.tooltiptext}>Integrations</span>
           )}
-        </li>
+        </NavLink>
       </ul>
       {sidebar ? (
         <button onClick={logoutHandler}>Logout</button>
