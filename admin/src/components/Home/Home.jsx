@@ -1,13 +1,13 @@
 import React from "react";
 import classes from "./Home.module.css";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "./Sidebar/Sidebar";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
-import Products from "../Products/Products";
-import Orders from "../Orders/Orders";
-import Customers from "../Customers/Customers";
-import Reports from "../Reports/Reports";
-import Integrations from "../Integrations/Integrations";
+import Dashboard from "./Dashboard/Dashboard";
+import Products from "./Products/Products";
+import Orders from "./Orders/Orders";
+import Customers from "./Customers/Customers";
+import Reports from "./Reports/Reports";
+import Integrations from "./Integrations/Integrations";
 
 export const userContext = React.createContext();
 

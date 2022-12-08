@@ -9,7 +9,7 @@ import {
 import { BsMoon } from "react-icons/bs";
 import { MdOutlineWidgets } from "react-icons/md";
 import {BiUserCircle} from "react-icons/bi"
-import { userContext } from "../../Home/Home";
+import { userContext } from "../../Home";
 
 const Navbar = () => {
   const ctx = React.useContext(userContext);

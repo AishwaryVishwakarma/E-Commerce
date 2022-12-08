@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Dashboard.module.css";
-import { userContext } from "../Home/Home";
+import { userContext } from "../Home";
 import Navbar from "./Navbar/Navbar";
 
 const Dashboard = () => {
